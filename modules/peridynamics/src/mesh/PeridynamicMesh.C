@@ -270,6 +270,12 @@ PeridynamicMesh::horizon(dof_id_type node_id)
 }
 
 bool
+PeridynamicMesh::on_boundary(dof_id_type node_id)
+{
+  return _pdnode[node_id].on_boundary;
+}
+
+bool
 PeridynamicMesh::checkInside(
     Point crack_start, Point crack_end, Point point, Real crack_width, Real tol)
 {

@@ -142,6 +142,7 @@ GeneratedMeshPD::init2DRectangular()
         _pdnode[k].volume = _spacing * _spacing;
         _pdnode[k].volumesum = 0.0;
         _pdnode[k].blockID = 0;
+        _pdnode[k].on_boundary = false;
         ++k;
       }
     }
@@ -155,7 +156,15 @@ GeneratedMeshPD::init2DRectangular()
   // find bonds for each node
   _total_bonds = 0;
   for (unsigned int i = 0; i < _total_nodes; ++i)
+  {
     _total_bonds += _node_neighbors[i].size();
+
+    // finding boundary nodes
+    Real X = (_pdnode[i].coord)(0);
+    Real Y = (_pdnode[i].coord)(1);
+    if (X < _xmin + _spacing || X > _xmax - _spacing || Y < _ymin + _spacing || Y > _ymax - _spacing)
+      _pdnode[i].on_boundary = true;
+  }
   _total_bonds /= 2;
 
   k = 0;
@@ -230,6 +239,7 @@ GeneratedMeshPD::init3DRectangular()
           _pdnode[k].volume = _spacing * _spacing * _spacing;
           _pdnode[k].volumesum = 0.0;
           _pdnode[k].blockID = 0;
+          _pdnode[k].on_boundary = false;
           ++k;
         }
       }
@@ -243,7 +253,16 @@ GeneratedMeshPD::init3DRectangular()
   // find bonds for each node
   _total_bonds = 0;
   for (unsigned int i = 0; i < _total_nodes; ++i)
+  {
     _total_bonds += _node_neighbors[i].size();
+
+    // define boundary nodes
+    Real X = (_pdnode[i].coord)(0);
+    Real Y = (_pdnode[i].coord)(1);
+    Real Z = (_pdnode[i].coord)(2);
+    if (X < _xmin + _spacing || X > _xmax - _spacing || Y < _ymin + _spacing || Y > _ymax - _spacing || Z < _zmin + _spacing || Z > _zmax - _spacing)
+      _pdnode[i].on_boundary = true;
+  }
   _total_bonds /= 2;
 
   k = 0;

@@ -85,6 +85,7 @@ FileMeshPD::init()
     _pdnode[fe_elem->id()].volume = fe_elem->volume();
     _pdnode[fe_elem->id()].volumesum = 0.0;
     _pdnode[fe_elem->id()].blockID = fe_elem->subdomain_id();
+    _pdnode[fe_elem->id()].on_boundary = fe_elem->on_boundary();
   }
 
   // search node neighbors

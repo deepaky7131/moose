@@ -12,7 +12,7 @@
 
 [Mesh]
   type = FileMeshPD
-  file = square.e
+  file = center_crack_in0.e
   horizon_number = 3
 []
 
@@ -72,7 +72,7 @@
   solve_type = PJFNK
   line_search = none
   start_time = 0
-  end_time = 1
+  end_time = 5
 []
 
 [Outputs]

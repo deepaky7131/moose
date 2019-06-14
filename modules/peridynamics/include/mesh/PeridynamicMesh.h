@@ -28,6 +28,7 @@ struct PD_Node
   Real volume;
   Real volumesum;
   unsigned int blockID;
+  bool on_boundary;
 };
 
 /**
@@ -120,8 +121,13 @@ public:
   Real horizon(dof_id_type node_id);
 
   /**
-   * Function to check whether a material point falls within a given crack gometry
+   * Function to check whether a material point is on the boundary or not
    */
+  bool on_boundary(dof_id_type node_id);
+
+  /**
+    * Function to check whether a material point falls within a given crack gometry
+  */
   bool checkInside(Point start, Point end, Point point, Real width, Real tol = 0);
 
   /**
